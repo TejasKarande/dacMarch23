@@ -1,0 +1,124 @@
+1. Display the Supplier name and the Quantity sold.
+
+ select Sname , Qty from Supplier , spj
+    -> where supplier.suppliercode = spj.supplier;
++-------+------+
+| Sname | Qty  |
++-------+------+
+| ABC   |   10 |
+| PQR   |    5 |
++-------+------+
+2 rows in set (0.04 sec)
+
+
+2. Display the Part name and Quantity sold.
+
+select pname , Qty from parts , spj
+    -> where parts.partno = spj.part;
++-------+------+
+| pname | Qty  |
++-------+------+
+| part1 |   10 |
+| part2 |    5 |
++-------+------+
+2 rows in set (0.00 sec)
+
+3. Display the Project name and Quantity sold.
+
+ select prjname , Qty from projects , spj
+    -> where projects.projectno = spj.projects;
++---------+------+
+| prjname | Qty  |
++---------+------+
+| right   |   10 |
+| left    |    5 |
++---------+------+
+2 rows in set (0.00 sec)
+
+4. Display the Supplier name, Part name, Project name and Quantity sold.
+
+ select distinct sname , pname , prjname , qty from supplier , parts ,Projects, spj where supplier.suppliercode = spj.supplier and parts.partno = spj.part and projects.projectno = spj.projects;
++-------+-------+---------+------+
+| sname | pname | prjname | qty  |
++-------+-------+---------+------+
+| la    | part2 | right   |    5 |
+| ABC   | part1 | right   |   10 |
+| PQR   | part2 | left    |    5 |
+| LMN   | part1 | left    |    7 |
+| ABC   | part1 | left    |   10 |
++-------+-------+---------+------+
+5 rows in set (0.00 sec)
+
+5. Display the Supplier name, Supplying Parts to a Project in the same City.
+
+select sname , pname , prjname  from Supplier ,parts,projects where Supplier.city = parts.Cities and parts.cities = projects.city;
++-------+-------+---------+
+| sname | pname | prjname |
++-------+-------+---------+
+| ABC   | part1 | right   |
+| PQR   | part2 | left    |
++-------+-------+---------+
+2 rows in set (0.00 sec)
+
+6. Display the Part name that is ‘Red’ is color, and the Quantity sold
+
+select pname , color , Qty from parts , spj where color = 'Red' and parts.partno = spj.part;
++-------+-------+------+
+| pname | color | Qty  |
++-------+-------+------+
+| part1 | Red   |   10 |
++-------+-------+------+
+1 row in set (0.00 sec)
+
+7. Display all the Quantity sold by Suppliers with the Status = 20.
+
+select Qty from supplier , spj where supplier.suppliercode = spj.supplier and supplier.status = 20;
++------+
+| Qty  |
++------+
+|    5 |
++------+
+1 row in set (0.00 sec)
+
+8. Display all the Parts and Quantity with a Weight > 14.
+
+select pname ,weight , Qty from parts , spj where parts.partno = spj.part and parts.weight > 14;
++-------+--------+------+
+| pname | weight | Qty  |
++-------+--------+------+
+| part1 |     20 |   10 |
++-------+--------+------+
+1 row in set (0.00 sec)
+
+9. Display all the Project names and City, which has bought more than 5 Parts.
+
+select prjname , cities , Qty from projects , parts ,spj where projects.city = parts.cities and projects.projectno = spj.projects and Qty>5;
++---------+--------+------+
+| prjname | cities | Qty  |
++---------+--------+------+
+| right   | Mumbai |   10 |
++---------+--------+------+
+1 row in set (0.00 sec)
+
+10. Display all the Part names and Quantity sold that have a Weight less than 15.
+
+select pname , Qty from parts , spj where parts.partno = spj.part and parts.weight < 15;
++-------+------+
+| pname | Qty  |
++-------+------+
+| part2 |    5 |
++-------+------+
+1 row in set (0.00 sec)
+
+11. Display all the Employee names and the name of their Managers.
+
+select empname , sdept.depthead "Manager" from semp , sdept where sdept.deptno = semp.deptno;
++---------+---------+
+| empname | Manager |
++---------+---------+
+| Sunil   | Sunil   |
+| Hiren   | Hiren   |
+| ALI     | Sunil   |
++---------+---------+
+3 rows in set (0.00 sec)
+

@@ -1,0 +1,78 @@
+1. Display all the Suppliers with the same Status as the supplier, 10.
+
+select suppliercode , sname , city from supplier where status = 10;
++--------------+-------+---------+
+| suppliercode | sname | city    |
++--------------+-------+---------+
+| S1           | ABC   | Mumbai  |
+| S4           | LMN   | Kolkata |
++--------------+-------+---------+
+2 rows in set (0.00 sec)
+
+
+2. Display all the Employees in the same department as the employee 10.
+
+select Empno , empname from semp where Deptno = 10;
++-------+---------+
+| Empno | empname |
++-------+---------+
+| 1     | Sunil   |
+| 3     | ALI     |
++-------+---------+
+2 rows in set (0.00 sec)
+
+
+3. Display all the Parts which have more Weight than all the Red parts.
+
+select partno , pname , weight from parts where parts.weight > 20;
++--------+-------+--------+
+| partno | pname | weight |
++--------+-------+--------+
+| P3     | Part3 |     40 |
+| P4     | Part4 |     70 |
++--------+-------+--------+
+2 rows in set (0.00 sec)
+
+4. Display all the Projects going on in the same city as the project ‘right’.
+
+ select projectno , prjname , city from projects where prjname = 'right';
++-----------+---------+--------+
+| projectno | prjname | city   |
++-----------+---------+--------+
+| J1        | right   | Mumbai |
+| J3        | right   | Mumbai |
++-----------+---------+--------+
+2 rows in set (0.00 sec)
+
+5. Display all the Parts with Weight less than all the Green parts.
+
+select partno , pname , weight from parts where parts.weight <70;
++--------+-------+--------+
+| partno | pname | weight |
++--------+-------+--------+
+| P1     | part1 |     20 |
+| P2     | part2 |      5 |
+| P3     | Part3 |     40 |
++--------+-------+--------+
+3 rows in set (0.00 sec)
+
+6. Display the name of the Supplier who has sold the maximum Quantity (in one sale).
+
+select sname , qty from supplier , spj where supplier.suppliercode = spj.supplier and qty =(select max(qty) from spj);
++-------+------+
+| sname | qty  |
++-------+------+
+| ABC   |   10 |
++-------+------+
+1 row in set (0.04 sec)
+
+7. Display the name of the Employee with the minimum Salary.
+
+select empname ,basic as 'sal' from semp where basic = (select min(basic) from semp);
++---------+-------+
+| empname | sal   |
++---------+-------+
+| ALI     | 40000 |
++---------+-------+
+1 row in set (0.00 sec)
+

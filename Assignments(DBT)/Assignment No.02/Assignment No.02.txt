@@ -1,0 +1,84 @@
+1. Display the Supplier table in the descending order of CITY.
+
+select * from supplier order by City desc;
++--------------+-------+--------+---------+
+| Suppliercode | Sname | status | City    |
++--------------+-------+--------+---------+
+| S3           | la    |     30 | Pune    |
+| S1           | ABC   |     10 | Mumbai  |
+| S4           | LMN   |     10 | Kolkata |
+| S2           | PQR   |     20 | Chennai |
++--------------+-------+--------+---------+
+4 rows in set (0.00 sec)
+
+2. Display the Part Table in the ascending order of CITY and within the city in the ascending order of Part names.
+
+ select * from parts order by Cities , pname;
++--------+-------+--------+--------+---------+
+| partno | pname | color  | weight | cities  |
++--------+-------+--------+--------+---------+
+| P2     | part2 | yellow |      5 | Chennai |
+| P4     | Part4 | Green  |     70 | Delhi   |
+| P3     | Part3 | Blue   |     40 | Kolkata |
+| P1     | part1 | Red    |     20 | Mumbai  |
++--------+-------+--------+--------+---------+
+4 rows in set (0.00 sec)
+
+3. Display all the Suppliers with a status between 10 and 20.
+
+select suppliercode , sname , status from supplier where status between 10 and 20;
++--------------+-------+--------+
+| suppliercode | sname | status |
++--------------+-------+--------+
+| S1           | ABC   |     10 |
+| S2           | PQR   |     20 |
+| S4           | LMN   |     10 |
++--------------+-------+--------+
+3 rows in set (0.00 sec)
+
+4. Display all the Parts and their Weight, which are not in the range of 10 and 15.
+
+select partno , pname , weight from parts where weight not between 10 and 15;
++--------+-------+--------+
+| partno | pname | weight |
++--------+-------+--------+
+| P1     | part1 |     20 |
+| P2     | part2 |      5 |
+| P3     | Part3 |     40 |
+| P4     | Part4 |     70 |
++--------+-------+--------+
+4 rows in set (0.01 sec)
+
+5. Display all the Part names starting with the letter ‘P’.
+
+ select pname from parts where substr(pname,1,1) = 'p';
++-------+
+| pname |
++-------+
+| part1 |
+| part2 |
+| Part3 |
+| Part4 |
++-------+
+4 rows in set (0.00 sec)
+
+6. Display all the Suppliers, belonging to cities starting with the letter ‘M’.
+
+select * from supplier where substr(city , 1 , 1) ='M';
++--------------+-------+--------+--------+
+| Suppliercode | Sname | status | City   |
++--------------+-------+--------+--------+
+| S1           | ABC   |     10 | Mumbai |
++--------------+-------+--------+--------+
+1 row in set (0.00 sec)
+
+7. Display all the Projects, with the third letter in JNAME as ‘n’.
+
+select * from projects where substr(prjname,3,1) = 'g';
++-----------+---------+--------+
+| projectno | prjname | city   |
++-----------+---------+--------+
+| J1        | right   | Mumbai |
+| J3        | right   | Mumbai |
++-----------+---------+--------+
+2 rows in set (0.00 sec)

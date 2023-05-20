@@ -1,0 +1,226 @@
+1. Create the table SEMP with the following structure:-
+EMPNO CHAR(4)
+EMPNAME CHAR(20)
+BASIC FLOAT
+DEPTNO CHAR(2)
+DEPTHEAD CHAR(4)
+
+mysql> create table SEMP(EMPNO char(4) , EMPNAME char(20) , BASIC float , DEPTNO char(2) , DEPTHEAD char(4));
+Query OK, 0 rows affected (0.03 sec)
+
+
+2. Create the table SDEPT with the following structure:-
+DEPTNO CHAR(2)
+DEPTNAME CHAR(15)
+
+mysql> create table SDEPT (DEPTNO char(2) , DEPTNAME char(15));
+Query OK, 0 rows affected (0.07 sec)
+
+3. Insert into the SDEPT table the following values:-
+10, Development
+20, Training
+
+mysql> insert into sdept values (10,'Development'),
+    -> (20 , 'Training');
+Query OK, 2 rows affected (0.05 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+
+4. Insert into the SEMP table the following values:-
+0001, SUNIL, 6000, 10
+0002, HIREN, 8000, 20
+0003, ALI, 4000, 10, 0001
+0004, GEORGE, 6000, 0002
+
+mysql> insert into semp values
+    -> (0001 , 'Sunil' , 60000 , 10,Null);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into semp values
+    -> (0004 , 'GEORGE' ,6000 , 0002,Null),
+    -> (0002 , 'Hiren' , 80000 , 20,Null),
+    -> (0003 , 'ALI' , 40000,10 , 0001);
+Query OK, 3 rows affected (0.04 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from semp;
++-------+---------+-------+--------+----------+
+| EMPNO | EMPNAME | BASIC | DEPTNO | DEPTHEAD |
++-------+---------+-------+--------+----------+
+| 1     | Sunil   | 60000 | 10     | NULL     |
+| 4     | GEORGE  |  6000 | 2      | NULL     |
+| 2     | Hiren   | 80000 | 20     | NULL     |
+| 3     | ALI     | 40000 | 10     | 1        |
++-------+---------+-------+--------+----------+
+4 rows in set (0.00 sec)
+
+
+Create S, P, J, SPJ tables as specified below and insert a few rows in each table:-
+SUPPLIER                       - S
+(S#, Sname, Status, City)
+
+
+PARTS                           - P
+(P#, Pname, Color, Weight, City)
+
+PROJECTS                        - J
+(J#, Jname, City)
+
+SUPPLIER-PARTS-PROJECT          - SPJ
+(S#, P#, J#, Qty)
+
+Sample data for S# column:- ‘S1’, ‘S2’, ‘S3’, etc.
+Sample data for P# column:- ‘P1’, ‘P2’, ‘P3’, etc.
+Sample data for J# column:- ‘J1’, ‘J2’, ‘J3’, etc.
+Sample data for Status column:- 10, 20, 30, etc.
+
+
+mysql> create table Supplier (Suppliercode varchar(4) ,  Sname char(20) , Status tinyint(1) , City char(20));
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> create table Parts (Partno varchar(4) ,  Pname char(20) , Color char(10) ,Weight int , Cities char(20));
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> create table Projects (Projectno varchar(4) , prjname char(20) ,City char(20));
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> create table SPJ (Supplier char(4) , partno char(4) , Project char(4) , Qty int);
+Query OK, 0 rows affected (0.07 sec)
+
+
+mysql> insert into Supplier values('S1','ABC',10,'Mumbai'),
+    -> ('S2','PQR' , 20 , 'Chennai'),
+    -> ('S3','la' , 30 , 'Pune'),
+    -> ('S4','LMN' , 10 , 'Kolkata');
+Query OK, 4 rows affected (0.05 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> insert into Parts values('P1','part1','Red',20,'Mumbai'),
+    -> ('P2','part2','yellow',13,'Chennai'),
+    -> ('P3','part3','blue',40,'Kolkata'),
+    -> ('P4','part4','Green',70,'Delhi');
+Query OK, 4 rows affected (0.05 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+
+mysql> insert into Projects values('J1','right','Mumbai'),
+    -> ('J2','left','Chennai'),
+    -> ('J3','right','Mumbai'),
+    -> ('J4','left','Chennai');
+Query OK, 4 rows affected (0.05 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+
+
+mysql> insert into SPJ values('S1','P1','J1',10),
+    -> ('S2','P2','J2',5),
+    -> ('S3','P2','J1',5),
+    -> ('S4','P1','J2',7),
+    -> ('S5','P1','J2',10);
+Query OK, 5 rows affected (0.05 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+
+5. Display all the data from the S table.
+
+mysql> select * from supplier;
+
+6. Display only the S# and SNAME fields from the S table.
+
+select suppliercode , sname from supplier;
++--------------+-------+
+| suppliercode | sname |
++--------------+-------+
+| S1           | ABC   |
+| S2           | PQR   |
+| S3           | la    |
+| S4           | LMN   |
++--------------+-------+
+4 rows in set (0.00 sec)
+
+7. Display the PNAME and COLOR from the P table for the CITY=”Mumbai”.
+
+mysql> select  pname , color from parts where cities = 'Mumbai';
++-------+-------+
+| pname | color |
++-------+-------+
+| part1 | Red   |
++-------+-------+
+1 row in set (0.04 sec)
+
+8. Display all the Suppliers from Pune.
+
+mysql> select  * from supplier where city = 'Pune';
++--------------+-------+--------+------+
+| Suppliercode | Sname | status | City |
++--------------+-------+--------+------+
+| S3           | la    |     30 | Pune |
++--------------+-------+--------+------+
+1 row in set (0.00 sec)
+
+9. Display all the Suppliers from Mumbai or Pune.
+
+mysql> select  * from supplier where city = 'Mumbai' or city = 'Pune';
++--------------+-------+--------+--------+
+| Suppliercode | Sname | status | City   |
++--------------+-------+--------+--------+
+| S1           | ABC   |     10 | Mumbai |
+| S3           | la    |     30 | Pune   |
++--------------+-------+--------+--------+
+2 rows in set (0.00 sec)
+
+10. Display all the Projects in Mumbai.
+
+mysql> select  * from Projects where City = 'Mumbai';
++-----------+---------+--------+
+| projectno | prjname | city   |
++-----------+---------+--------+
+| J1        | right   | Mumbai |
+| J3        | right   | Mumbai |
++-----------+---------+--------+
+2 rows in set (0.00 sec)
+
+11. Display all the Partnames with the weight between 12 and 14 (inclusive of both).
+
+mysql> select  * from Parts where weight between 12 and 14;
++--------+-------+--------+--------+---------+
+| partno | pname | color  | weight | cities  |
++--------+-------+--------+--------+---------+
+| P2     | part2 | yellow |     13 | Chennai |
++--------+-------+--------+--------+---------+
+1 row in set (0.00 sec)
+
+12. Display all the Suppliers with a Status greater than or equal to 20.
+
+mysql> select  * from Supplier where status > 20;
++--------------+-------+--------+------+
+| Suppliercode | Sname | status | City |
++--------------+-------+--------+------+
+| S3           | la    |     30 | Pune |
++--------------+-------+--------+------+
+1 row in set (0.00 sec)
+
+13. Display all the Suppliers except the Suppliers from Pune.
+
+mysql> select  * from Supplier where city != 'Pune';
++--------------+-------+--------+---------+
+| Suppliercode | Sname | status | City    |
++--------------+-------+--------+---------+
+| S1           | ABC   |     10 | Mumbai  |
+| S2           | PQR   |     20 | Chennai |
+| S4           | LMN   |     10 | Kolkata |
++--------------+-------+--------+---------+
+3 rows in set (0.00 sec)
+
+14. Display only the Cities from where the Suppliers come from.
+
+mysql> select City from Supplier;
++---------+
+| City    |
++---------+
+| Mumbai  |
+| Chennai |
+| Pune    |
+| Kolkata |
++---------+
+4 rows in set (0.00 sec)
